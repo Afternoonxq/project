@@ -1,0 +1,578 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffet - ตี๋ใหญ่</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        p {
+            color: black;
+        }
+
+        h2 {
+            color: black;
+        }
+
+        body {
+            padding: 20px;
+            background-color: #fff8dc;
+            color: white;
+            font-family: "Noto Sans Thai", serif;
+        }
+
+        .menu-item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .menu-item {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar {
+            background-color: #ff3318;
+            padding: 1rem;
+            color: white;
+        }
+
+        .navbar a {
+            color: black;
+            font-weight: bold;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .menu-section {
+            margin: 30px 0;
+        }
+
+        .menu-title {
+            background-color: #ff3318;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .menu-item img {
+            width: 300px;
+            /* กำหนดความกว้าง */
+            height: 200px;
+            /* กำหนดความสูง */
+            object-fit: cover;
+            /* จัดการรูปภาพให้พอดีพื้นที่ */
+            border-radius: 8px;
+        }
+
+        .menu-item .item-name {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .menu-item .item-price {
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .footer {
+            background-color: #ff3318;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+        }
+
+        .quantity-control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-display {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #ddd;
+            padding: 5px;
+            color: gray;
+        }
+
+        .btn-quantity {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ff3318;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .btn-quantity:disabled {
+            background: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <h3 class="text-center m-2">ร้านบุฟเฟ่ต์ตี๋ใหญ่</h3>
+    </nav>
+    <div class="container">
+
+        <!-- เมนูรายการอาหาร -->
+        <div class="menu-section">
+            <div class="menu-title">เมนูอาหารสด</div>
+            <div class="menu-grid">
+                <!-- ตัวอย่างรายการอาหาร -->
+                <div class="menu-item">
+                    <img src="img/porksilde.PNG" alt="สันคอสไลด์">
+                    <h5 class="item-name">สันคอสไลด์</h5>
+                    <p class="item-price">ราคา: 100 บาท</p>
+                    <div class="quantity-control">
+                        <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="100">-</button>
+                        <div class="quantity-display" data-price="100">0</div>
+                        <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="100">+</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="img/porksilde2.PNG" alt="สามชั้นสไลด์">
+                    <h5 class="item-name">สามชั้นสไลด์</h5>
+                    <p class="item-price">ราคา: 150 บาท</p>
+                    <div class="quantity-control">
+                        <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="150">-</button>
+                        <div class="quantity-display" data-price="150">0</div>
+                        <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="150">+</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="img/porksilde3.PNG" alt="เนื้อริบอายสไลด์">
+                    <h5 class="item-name">เนื้อริบอายสไลด์</h5>
+                    <p class="item-price">ราคา: 120 บาท</p>
+                    <div class="quantity-control">
+                        <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="120">-</button>
+                        <div class="quantity-display" data-price="120">0</div>
+                        <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="120">+</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="img/กุ้ง.PNG" alt="กุ้งขาว">
+                    <h5 class="item-name">กุ้งขาว</h5>
+                    <p class="item-price">ราคา: 130 บาท</p>
+                    <div class="quantity-control">
+                        <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="130">-</button>
+                        <div class="quantity-display" data-price="130">0</div>
+                        <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="130">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-title">เมนูผัก</div>
+                <div class="menu-grid">
+                    <!-- ตัวอย่างรายการอาหาร -->
+                    <div class="menu-item">
+                        <img src="img/ผักบุ้ง.PNG" alt="ผักบุ้ง">
+                        <h5 class="item-name">ผักบุ้ง</h5>
+                        <p class="item-price">ราคา: 20 บาท</p>
+                        <div class="quantity-control">
+                            <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="20">-</button>
+                            <div class="quantity-display" data-price="20">0</div>
+                            <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="20">+</button>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="img/ผักกาดขาว.PNG" alt="ผักกาดขาว">
+                        <h5 class="item-name">ผักกาดขาว</h5>
+                        <p class="item-price">ราคา: 10 บาท</p>
+                        <div class="quantity-control">
+                            <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="10">-</button>
+                            <div class="quantity-display" data-price="10">0</div>
+                            <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="10">+</button>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="img/ผักกวางตุ้ง.PNG" alt="ผักกวางตุ้ง">
+                        <h5 class="item-name">ผักกวางตุ้ง</h5>
+                        <p class="item-price">ราคา: 10 บาท</p>
+                        <div class="quantity-control">
+                            <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="10">-</button>
+                            <div class="quantity-display" data-price="10">0</div>
+                            <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="10">+</button>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="img/สาหร่าย.PNG" alt="สาหร่ายวากาเมะ">
+                        <h5 class="item-name">สาหร่ายวากาเมะ</h5>
+                        <p class="item-price">ราคา: 20 บาท</p>
+                        <div class="quantity-control">
+                            <button class="btn-quantity" onclick="updateQuantity(this, -1)" data-price="20">-</button>
+                            <div class="quantity-display" data-price="20">0</div>
+                            <button class="btn-quantity" onclick="updateQuantity(this, 1)" data-price="20">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-title">เมนูเส้น</div>
+                    <div class="menu-grid">
+                        <!-- ตัวอย่างรายการอาหาร -->
+                        <div class="menu-item">
+                            <img src="img/วุ้นเส้น.PNG" alt="วุ้นเส้น">
+                            <h5 class="item-name">วุ้นเส้น</h5>
+                            <p class="item-price">ราคา: 20 บาท</p>
+                            <div class="quantity-control">
+                                <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                    data-price="20">-</button>
+                                <div class="quantity-display" data-price="20">0</div>
+                                <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                    data-price="20">+</button>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="img/เส้นแก้ว.PNG" alt="เส้นแก้ว">
+                            <h5 class="item-name">เส้นแก้ว</h5>
+                            <p class="item-price">ราคา: 20 บาท</p>
+                            <div class="quantity-control">
+                                <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                    data-price="20">-</button>
+                                <div class="quantity-display" data-price="20">0</div>
+                                <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                    data-price="20">+</button>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="img/หมี่หยก.PNG" alt="หมี่หยก">
+                            <h5 class="item-name">หมี่หยก</h5>
+                            <p class="item-price">ราคา: 30 บาท</p>
+                            <div class="quantity-control">
+                                <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                    data-price="30">-</button>
+                                <div class="quantity-display" data-price="30">0</div>
+                                <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                    data-price="30">+</button>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="img/วุ้นเส้นเกาหลี.PNG" alt="วุ้นเส้นเกาหลี">
+                            <h5 class="item-name">วุ้นเส้นเกาหลี</h5>
+                            <p class="item-price">ราคา: 30 บาท</p>
+                            <div class="quantity-control">
+                                <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                    data-price="30">-</button>
+                                <div class="quantity-display" data-price="30">0</div>
+                                <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                    data-price="30">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-section">
+                        <div class="menu-title">ของทานเล่น</div>
+                        <div class="menu-grid">
+                            <!-- ตัวอย่างรายการอาหาร -->
+                            <div class="menu-item">
+                                <img src="img/มาม่าเกาหลี.PNG" alt="มาม่าเกาหลี">
+                                <h5 class="item-name">มาม่าเกาหลี</h5>
+                                <p class="item-price">ราคา: 40 บาท</p>
+                                <div class="quantity-control">
+                                    <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                        data-price="40">-</button>
+                                    <div class="quantity-display" data-price="40">0</div>
+                                    <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                        data-price="40">+</button>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <img src="img/เกี๊ยวทอด.PNG" alt="เกี๊ยวทอด">
+                                <h5 class="item-name">เกี๊ยวทอด</h5>
+                                <p class="item-price">ราคา: 20 บาท</p>
+                                <div class="quantity-control">
+                                    <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                        data-price="20">-</button>
+                                    <div class="quantity-display" data-price="20">0</div>
+                                    <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                        data-price="20">+</button>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <img src="img/หอมทอด.PNG" alt="หอมทอด">
+                                <h5 class="item-name">หอมทอด</h5>
+                                <p class="item-price">ราคา: 30 บาท</p>
+                                <div class="quantity-control">
+                                    <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                        data-price="30">-</button>
+                                    <div class="quantity-display" data-price="30">0</div>
+                                    <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                        data-price="30">+</button>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <img src="img/ข้าวอบ.PNG" alt="ข้าวอบ">
+                                <h5 class="item-name">ข้าวอบ</h5>
+                                <p class="item-price">ราคา: 60 บาท</p>
+                                <div class="quantity-control">
+                                    <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                        data-price="60">-</button>
+                                    <div class="quantity-display" data-price="60">0</div>
+                                    <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                        data-price="60">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-section">
+                            <div class="menu-title">ของหวาน & เครื่องดื่ม</div>
+                            <div class="menu-grid">
+                                <!-- ตัวอย่างรายการอาหาร -->
+                                <div class="menu-item">
+                                    <img src="img/แตงโม.PNG" alt="แตงโม">
+                                    <h5 class="item-name">แตงโม</h5>
+                                    <p class="item-price">ราคา: 20 บาท</p>
+                                    <div class="quantity-control">
+                                        <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                            data-price="20">-</button>
+                                        <div class="quantity-display" data-price="20">0</div>
+                                        <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                            data-price="20">+</button>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <img src="img/สัปปะรด.PNG" alt="สัปปะรด">
+                                    <h5 class="item-name">สัปปะรด</h5>
+                                    <p class="item-price">ราคา: 20 บาท</p>
+                                    <div class="quantity-control">
+                                        <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                            data-price="20">-</button>
+                                        <div class="quantity-display" data-price="20">0</div>
+                                        <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                            data-price="20">+</button>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <img src="img/เยลลี่.PNG" alt="เยลลี่">
+                                    <h5 class="item-name">เยลลี่</h5>
+                                    <p class="item-price">ราคา: 10 บาท</p>
+                                    <div class="quantity-control">
+                                        <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                            data-price="10">-</button>
+                                        <div class="quantity-display" data-price="10">0</div>
+                                        <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                            data-price="10">+</button>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <img src="img/น้ำเอส.PNG" alt="น้ำอัดลม">
+                                    <h5 class="item-name">น้ำอัดลม</h5>
+                                    <p class="item-price">ราคา: 20 บาท</p>
+                                    <div class="quantity-control">
+                                        <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                            data-price="20">-</button>
+                                        <div class="quantity-display" data-price="20">0</div>
+                                        <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                            data-price="20">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <img src="img/ไอติม.jpg" alt="ไอติม">
+                                    <h5 class="item-name">ไอติม</h5>
+                                    <p class="item-price">ราคา: 30 บาท</p>
+                                    <div class="quantity-control">
+                                        <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                            data-price="30">-</button>
+                                        <div class="quantity-display" data-price="30">0</div>
+                                        <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                            data-price="30">+</button>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <img src="img/สเลอปี้.jpg" alt="สเลอปี้">
+                                    <h5 class="item-name">สเลอปี้</h5>
+                                    <p class="item-price">ราคา: 20 บาท</p>
+                                    <div class="quantity-control">
+                                        <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                            data-price="20">-</button>
+                                        <div class="quantity-display" data-price="20">0</div>
+                                        <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                            data-price="20">+</button>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <img src="img/ชามะลิ.PNG" alt="ชามะลิ">
+                                    <h5 class="item-name">ชามะลิ</h5>
+                                    <p class="item-price">ราคา: 20 บาท</p>
+                                    <div class="quantity-control">
+                                        <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                            data-price="20">-</button>
+                                        <div class="quantity-display" data-price="20">0</div>
+                                        <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                            data-price="20">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-section">
+                                <div class="menu-title">น้ำจิ้ม</div>
+                                <div class="menu-grid">
+                                    <!-- ตัวอย่างรายการอาหาร -->
+                                    <div class="menu-item">
+                                        <img src="img/น้ำจิ้มงาขาว.PNG" alt="น้ำจิ้มงาขาว">
+                                        <h5 class="item-name">น้ำจิ้มงาขาว</h5>
+                                        <p class="item-price">ราคา: 50 บาท</p>
+                                        <div class="quantity-control">
+                                            <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                                data-price="50">-</button>
+                                            <div class="quantity-display" data-price="50">0</div>
+                                            <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                                data-price="50">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <img src="img/น้ำจิ้มพอนสึ.PNG" alt="น้ำจิ้มพอนสึ">
+                                        <h5 class="item-name">น้ำจิ้มพอนสึ</h5>
+                                        <p class="item-price">ราคา: 50 บาท</p>
+                                        <div class="quantity-control">
+                                            <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                                data-price="50">-</button>
+                                            <div class="quantity-display" data-price="50">0</div>
+                                            <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                                data-price="50">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <img src="img/น้ำจิ้มซีฟูด.PNG" alt="น้ำจิ้มซีฟูด">
+                                        <h5 class="item-name">น้ำจิ้มซีฟูด</h5>
+                                        <p class="item-price">ราคา: 30 บาท</p>
+                                        <div class="quantity-control">
+                                            <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                                data-price="30">-</button>
+                                            <div class="quantity-display" data-price="30">0</div>
+                                            <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                                data-price="30">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <img src="img/น้ำจิ้มสุกี้.PNG" alt="น้ำจิ้มสุกี้">
+                                        <h5 class="item-name">น้ำจิ้มสุกี้</h5>
+                                        <p class="item-price">ราคา: 30 บาท</p>
+                                        <div class="quantity-control">
+                                            <button class="btn-quantity" onclick="updateQuantity(this, -1)"
+                                                data-price="30">-</button>
+                                            <div class="quantity-display" data-price="30">0</div>
+                                            <button class="btn-quantity" onclick="updateQuantity(this, 1)"
+                                                data-price="30">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ฟอร์มการคำนวณ -->
+                                <div id="order-summary" class="mt-4">
+                                    <h2>สรุปรายการ</h2>
+                                    <div id="summary"></div>
+                                    <button class="btn btn-success" onclick="calculateBill()">คำนวณบิล</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <footer class="footer">
+                            © 2025 ร้านบุฟเฟ่ต์ตี๋ใหญ่
+                        </footer>
+
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            function updateQuantity(button, change) {
+                                const display = button.parentElement.querySelector(".quantity-display");
+                                const currentQuantity = parseInt(display.innerText) || 0; // ป้องกัน NaN
+                                const newQuantity = Math.max(0, currentQuantity + change); // จำนวนไม่ต่ำกว่า 0
+                                display.innerText = newQuantity; // อัปเดตจำนวนสินค้าในหน้าจอ
+                            }
+
+                            function calculateBill() {
+                                let total = 0; // ราคารวมเริ่มต้น
+                                let discount = 0; // ส่วนลดเริ่มต้น
+                                let totalItems = 0; // จำนวนสินค้าทั้งหมด
+                                let selectedItems = []; // รายการสินค้าที่เลือก
+
+                                // เลือกข้อมูลจากทุก `.menu-item`
+                                const items = document.querySelectorAll(".menu-item");
+                                items.forEach(item => {
+                                    const quantityDisplay = item.querySelector(".quantity-display"); // จำนวนสินค้า
+                                    const quantity = parseInt(quantityDisplay.innerText) || 0; // อ่านจำนวน (หรือ 0 ถ้าไม่มี)
+                                    const price = parseFloat(quantityDisplay.dataset.price); // ราคา
+                                    const itemName = item.querySelector(".item-name").textContent; // ชื่อสินค้า
+
+                                    if (quantity > 0) {
+                                        // ถ้ามีการเลือกสินค้า (quantity > 0)
+                                        selectedItems.push(`${itemName} x ${quantity} = ${quantity * price} บาท`);
+                                        total += quantity * price; // คำนวณราคารวม
+                                        totalItems += quantity; // คำนวณจำนวนสินค้าทั้งหมด
+                                    }
+                                });
+
+                                // ตรวจสอบว่ามีส่วนลดหรือไม่ (ถ้าจำนวนสินค้าครบ 5 ชิ้นขึ้นไป)
+                                if (totalItems >= 5) {
+                                    discount = total * 0.1; // ลด 10%
+                                }
+
+                                // แสดงผลลัพธ์ด้วย SweetAlert
+                                Swal.fire({
+                                    title: 'สรุปรายการ',
+                                    html: `
+                                        <p><strong>ราคารวม:</strong> ${total.toFixed(2)} บาท</p>
+                                        <p><strong>ส่วนลด:</strong> ${discount.toFixed(2)} บาท</p>
+                                        <p><strong>ยอดสุทธิ:</strong> ${(total - discount).toFixed(2)} บาท</p>
+                                        <hr>
+                                        <p><strong>รายการอาหารที่เลือก:</strong></p>
+                                        <div>${selectedItems.map(item => `<span>${item}</span><br>`).join('')}</div>
+                                    `,
+                                    icon: 'info',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'ยืนยัน',
+                                    cancelButtonText: 'ยกเลิก'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        Swal.fire({
+                                            title: 'คำนวณบิลเรียบร้อย!',
+                                            text: `ราคาสุทธิ ${(total - discount).toFixed(2)} บาท`,
+                                            icon: 'success'
+                                        });
+                                    }
+                                });
+
+
+                            }
+                        </script>
+
+                        <script
+                            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
